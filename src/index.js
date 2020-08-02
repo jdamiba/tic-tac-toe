@@ -88,7 +88,7 @@ class Game extends React.Component {
         'Go to game start';
       return (
         <li key={move}>
-          <Button rounded onClick={() => this.jumpTo(move)}>{desc}</Button>
+          <Button className={move % 2 ? "is-primary" : "is-success"} rounded onClick={() => this.jumpTo(move)}>{desc}</Button>
         </li>
       );
     });
