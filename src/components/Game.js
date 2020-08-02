@@ -73,7 +73,7 @@ class Game extends React.Component {
         const desc = move ? 'Go to move #' + move : 'Go to game start';
         return (
           <li key={move}>
-            <Button className={move % 2 ? "is-primary" : "is-success"}
+            <Button className={move % 2 ? "is-dark" : "is-warning"}
                     rounded onClick={() => this.jumpTo(move)}>
               {desc}
             </Button>
