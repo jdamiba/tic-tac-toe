@@ -26,8 +26,8 @@ function calculateWinner(squares){
 }
 
 class Game extends React.Component {
-    constructor(props){
-      super(props);
+    constructor(){
+      super();
       this.state = {
         history: [{
           squares: Array(9).fill(null)
@@ -46,7 +46,7 @@ class Game extends React.Component {
         return;
       }
 
-      squares[i] = this.state.xIsNext ? 'X' : 'O';
+      squares[i] = this.state.xIsNext ? '🌞' : '🌚';
 
       this.setState({
         history: history.concat([{
@@ -87,7 +87,7 @@ class Game extends React.Component {
       if (winner){
         status = "Winner: " + winner;
       } else {
-        status = "Next Player is " + (this.state.xIsNext ? "X." : "O.")
+        status = "Next Player is " + (this.state.xIsNext ? '🌞' : '🌚')
       }
 
       if (this.state.stepNumber === 9){
@@ -96,7 +96,8 @@ class Game extends React.Component {
 
       return (
         <>
-          <h1 className="title">React.js Tic-Tac-Toe</h1>
+          <h1 className="title">Tic-Tac-Toe</h1>
+          <p>Tic-tac-toe is a game for two players, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner.</p>
           <div className="game">
             <div className="game-board">
               <Board squares={current.squares} onClick={(i) => this.handleClick(i)}/>
