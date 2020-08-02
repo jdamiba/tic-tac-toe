@@ -4,7 +4,7 @@ import './index.css';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Button } from 'react-bulma-components';
 
-
+// render one square
 function Square(props){
   return(
     <Button className="square" onClick={props.onClick}>
@@ -13,9 +13,10 @@ function Square(props){
   )
 }
 
+// render 9 squares
 class Board extends React.Component {
   renderSquare(i) {
-    return <Square value={this.props.squares[i]} onClick={() => this.props.onClick(i)}/>;
+    return <Square number={i} value={this.props.squares[i]} onClick={() => this.props.onClick(i)}/>;
   }
 
   render() {
@@ -41,6 +42,7 @@ class Board extends React.Component {
   }
 }
 
+// control game state
 class Game extends React.Component {
   constructor(props){
     super(props);
@@ -52,14 +54,18 @@ class Game extends React.Component {
       xIsNext: true,
     }
   }
+
   handleClick(i){
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
+
     squares[i] = this.state.xIsNext ? 'X' : 'O';
+
     this.setState({
       history: history.concat([{
         squares: squares,
@@ -80,31 +86,32 @@ class Game extends React.Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
-      const desc = move ?
-        'Go to move #' + move :
-        'Go to game start';
+      const desc = move ? 'Go to move #' + move : 'Go to game start';
       return (
         <li key={move}>
-          <Button className={move % 2 ? "is-primary" : "is-success"} rounded onClick={() => this.jumpTo(move)}>{desc}</Button>
+          <Button className={move % 2 ? "is-primary" : "is-success"}
+                  rounded onClick={() => this.jumpTo(move)}>
+            {desc}
+          </Button>
         </li>
       );
     });
 
     let status;
+    const winner = calculateWinner(current.squares);
+
     if (winner){
       status = "Winner: " + winner;
     } else {
       status = "Next Player is " + (this.state.xIsNext ? "X." : "O.")
     }
 
-    console.log(this.state.stepNumber)
-
     if (this.state.stepNumber === 9){
       status = "Game ends in a tie!"
     }
+
     return (
       <>
         <h1 className="title">React.js Tic-Tac-Toe</h1>
@@ -137,7 +144,9 @@ function calculateWinner(squares){
 
   for (let i = 0; i < lines.length; i++){
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c] ){
+
+    // game ends when three squares in the same row, column, or diagonal have the same mark
+    if (squares[a] && (squares[a] === squares[b]) && (squares[a] === squares[c]) ){
       return squares[a];
     }
   }
