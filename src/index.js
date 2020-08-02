@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'react-bulma-components/dist/react-bulma-components.min.css';
+import { Button } from 'react-bulma-components';
+
 
 function Square(props){
   return(
-    <button className="square" onClick={props.onClick}>
+    <Button className="square" onClick={props.onClick}>
       {props.value}
-    </button>
+    </Button>
   )
 }
 
@@ -86,7 +88,7 @@ class Game extends React.Component {
         'Go to game start';
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <Button rounded onClick={() => this.jumpTo(move)}>{desc}</Button>
         </li>
       );
     });
@@ -95,18 +97,28 @@ class Game extends React.Component {
     if (winner){
       status = "Winner: " + winner;
     } else {
-      status = "Next Player: " + (this.state.xIsNext ? "X" : "O")
+      status = "Next Player is " + (this.state.xIsNext ? "X." : "O.")
+    }
+
+    console.log(this.state.stepNumber)
+
+    if (this.state.stepNumber === 9){
+      status = "Game ends in a tie!"
     }
     return (
-      <div className="game">
-        <div className="game-board">
-          <Board squares={current.squares} onClick={(i) => this.handleClick(i)}/>
+      <>
+        <h1 className="title">React.js Tic-Tac-Toe</h1>
+        <div className="game">
+          <div className="game-board">
+            <Board squares={current.squares} onClick={(i) => this.handleClick(i)}/>
+          </div>
+          <div className="game-info">
+            <div>{status}</div>
+            <p>Game History</p>
+            <ol>{moves}</ol>
+          </div>
         </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol>{moves}</ol>
-        </div>
-      </div>
+      </>
     );
   }
 }
