@@ -97,16 +97,19 @@ class Game extends React.Component {
 
       return (
         <>
-          <h1 className="title">Tic-Tac-Toe</h1>
-          <Clock date={new Date()}/>
-          <p>Tic-tac-toe is a game for two players, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner.</p>
+          <div className="top-info">
+            <Clock />
+            <h1 className="title">Tic-Tac-Toe</h1>
+            <p>Tic-tac-toe is a game for two players, who take turns marking the spaces in a 3×3 grid.</p>
+            <p>The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner.</p>
+          </div>
           <div className="game">
             <div className="game-board">
               <Board squares={current.squares} onClick={(i) => this.handleClick(i)}/>
             </div>
             <div className="game-info">
-              <div>{status}</div>
-              <p>Game History</p>
+              <h2 className="status">{status}</h2>
+              <h2 className="history">Game History</h2>
               <ol>{moves}</ol>
             </div>
           </div>
