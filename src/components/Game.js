@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bulma-components';
 import Board from './Board';
+import Clock from './Clock'; // Import a component from another file
 
 function calculateWinner(squares){
   const lines = [
@@ -97,6 +98,7 @@ class Game extends React.Component {
       return (
         <>
           <h1 className="title">Tic-Tac-Toe</h1>
+          <Clock date={new Date()}/>
           <p>Tic-tac-toe is a game for two players, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner.</p>
           <div className="game">
             <div className="game-board">
