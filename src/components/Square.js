@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { Button } from 'react-bulma-components';
-import 'react-bulma-components/dist/react-bulma-components.min.css';
 
 function Square(props){
   return(
-    <Button className="square" onClick={props.onClick}>
+    <button className="square" onClick={props.onClick}>
       {props.value}
-    </Button>
+    </button>
   )
 }
 
